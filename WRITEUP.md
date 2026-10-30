@@ -1,5 +1,8 @@
 # Write-up: Long ATM SPX Straddle, 2018–2026
 
+## Summary
+Buying a 45-day ATM SPX straddle every month lost 29% over 2018-2026 (Sharpe -0.84), and still lost about 27% before trading costs. Options are usually priced for more movement than actually follows (the volatility risk premium), so the buyer pays a little on most trades and only recovers it in sharp volatility spikes. The backtest is built to avoid lookahead, includes costs, and its main limits are modeled prices and strike drift in large gaps.
+
 ## Strategy (full spec in [STRATEGY.md](STRATEGY.md))
 - **Entry:** when flat, buy 1 SPX call + 1 put on the monthly expiry (3rd Friday) with the most days left within 30–45 DTE at the fill date.
 - **Strike:** SPX close on the signal day, rounded to the nearest 5 points.
@@ -15,6 +18,7 @@ Prices: Black-Scholes with VIX/100 as volatility, interest rate and dividends 0.
 | −28.9% | −3.8% | −0.84 | −30.7% | 112 | 25% | +44.8% | −25.4% |
 
 ## Key findings
+- **Why it loses:** implied volatility, which sets the option price, has usually been higher than the volatility that actually followed. A straddle buyer pays that gap on most trades. Using VIX (which sits above ATM implied vol) likely makes this cost somewhat larger in the backtest than it was in reality.
 - **It loses about 29% over 8.8 years.** It wins 25% of the time. The average win is about 1.8× the average loss, but breaking even at a 25% win rate needs about 3×.
 - **Profits come in bursts around volatility spikes.** The equity curve jumps in Feb 2018, Feb 2020 and Apr 2025. The largest profit exits were Apr 2025 (+$44.8k), Apr 2026 (+$28.6k), Jan 2022 (+$22.0k) and Feb 2020 (+$19.2k). In between, time decay erodes the account steadily.
 - **The two largest losses were re-entries straight after a profit exit, at peak VIX.**
