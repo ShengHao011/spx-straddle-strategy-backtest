@@ -33,9 +33,9 @@ WRITEUP.md             results, findings and limitations
 
 ## Tests
 ```bash
-python -m pytest
+pytest
 ```
-(Use `python -m pytest`, not plain `pytest`, so the tests can import `src` and `config`.)
+(`pytest.ini` adds the project root to the import path, so the tests can import `src` and `config`.)
 
 ## More
 - [STRATEGY.md](STRATEGY.md): full rules, precise enough to reproduce every trade.

@@ -37,7 +37,7 @@ Checked at each close t while a position is open (not on the fill day itself), i
 "Entry premium" = straddle **mid** price at the entry fill (excluding costs).
 The exit is filled at close t+1, so realised P&L can be beyond ±50%.
 
-Expected behaviour: with no move and flat VIX, an ATM straddle's value scales with sqrt(time), so holding to 21 DTE loses about 1 - sqrt(21/DTE_entry). Most entries occur at ~43-45 DTE (the next expiry enters the window from above), so a typical calm-market trade exits at 21 DTE with ~-30%. Re-entries after early exits can start nearer 30 DTE and lose less (~-16%). Profit and stop exits mainly occur during volatility shifts.
+Expected behaviour: with no move and flat VIX, an ATM straddle's value scales with sqrt(time), so holding to 21 DTE loses about 1 - sqrt(21/DTE_entry). Most entries occur at ~43-45 DTE (the next expiry enters the window from above), so with no move at all a trade would exit at 21 DTE with ~-30%; in practice SPX always moves somewhat, which helps a straddle, and the actual median time exit was about -23%. Re-entries after early exits can start nearer 30 DTE and lose less (~-16%). Profit exits mainly occur during volatility shifts; the stop never triggered (see WRITEUP.md).
 
 ## 6. Position state and re-entry
 - A position is open from the close of its entry fill day until the close of its exit fill day.
